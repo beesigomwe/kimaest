@@ -13,11 +13,15 @@ interface BlogCardProps {
 
 export default function BlogCard({ id, title, excerpt, category, imageUrl, createdAt }: BlogCardProps) {
   const formatDate = (date: Date) => {
+    const dateObj = new Date(date);
+    if (isNaN(dateObj.getTime())) {
+      return 'Invalid Date';
+    }
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    }).format(date);
+    }).format(dateObj);
   };
 
   return (
